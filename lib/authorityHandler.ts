@@ -3,26 +3,13 @@ interface IUserAuthority {
   authority: number;
 }
 
-/** 權限Enum */
-enum DefaultAuthorityEnum {
-    NONE,
-    READ = 1 << 0, // 1 讀取
-    CREATE = 1 << 1, // 2 建立
-    UPDATE = 1 << 2, // 4 更新
-    DELETE = 1 << 3, // 8 刪除
-    EXPORT = 1 << 4, // 16 匯出
-    IMPORT = 1 << 5, // 32 匯入
-}
-
 export default class AuthorityHandler {
-	AuthorityEnum?: any;
 	functionAuthorityMap: any;
-	authorityNameMap: any;
+	authorityMap: any;
 
-	constructor(config: {AuthorityEnum?: any, functionAuthorityMap: any, authorityNameMap: any}) {
-		this.AuthorityEnum = config.AuthorityEnum ?? DefaultAuthorityEnum;
+	constructor(config: {functionAuthorityMap: any, authorityMap: any}) {
 		this.functionAuthorityMap = config.functionAuthorityMap;
-		this.authorityNameMap = config.authorityNameMap;
+		this.authorityMap = config.authorityMap;
 	}
 
 	/**
@@ -61,7 +48,7 @@ export default class AuthorityHandler {
 	getNameListByAuthority(authority: number): string[] {
 		const nameList = [];
 
-		for (const [name, value] of Object.entries(this.authorityNameMap)) {
+		for (const [name, value] of Object.entries(this.authorityMap)) {
 			if (authority & (value as number)) {
 				nameList.push(name);
 			}
@@ -82,7 +69,7 @@ export default class AuthorityHandler {
 		targetFunctionKey: string,
 		authorityName: string
 	) {
-		const authority = this.authorityNameMap[authorityName];
+		const authority = this.authorityMap[authorityName];
 		const authorityData = userAuthorityList.find(
 			({ functionKey }: { functionKey: string }) =>
 				functionKey === targetFunctionKey

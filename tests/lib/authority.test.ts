@@ -1,7 +1,7 @@
-import { AuthorityEnum, functionAuthorityMap, AuthorityNameEnum, authorityNameMap } from '../../config/authorityConfig'
+import { authorityMap, functionAuthorityMap, AuthorityNameEnum } from '../../config/authorityConfig'
 import AuthorityHandler from '../../lib/authorityHandler'
 
-const authorityHandler = new AuthorityHandler({ functionAuthorityMap, authorityNameMap });
+const authorityHandler = new AuthorityHandler({ functionAuthorityMap, authorityMap });
 const userAuthorityList = [
 	{ functionKey: 'F01', authority: 3 },
 	{ functionKey: 'F02', authority: 3 },
@@ -10,25 +10,25 @@ const userAuthorityList = [
 
 describe('Verifying the authoriy of function', () => {
 	it('should return the result that isValid is true when verifying the READ authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', AuthorityEnum.READ);
+		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ);
 		expect(result.isValid).toBe(true);
 		expect(result.invalidAuthorityList).toEqual([]);
 	});
 
 	it('should return the result that isValid is true when verifying the READ and UPDATE authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', AuthorityEnum.READ | AuthorityEnum.UPDATE);
+		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ | authorityMap.UPDATE);
 		expect(result.isValid).toBe(true);
 		expect(result.invalidAuthorityList).toEqual([]);
 	});
 
 	it('should return the result that isValid is false when verifying the EXPORT authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', AuthorityEnum.EXPORT);
+		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.EXPORT);
 		expect(result.isValid).toBe(false);
 		expect(result.invalidAuthorityList).toEqual(['EXPORT']);
 	});
 
 	it('should return the result that isValid is false when verifying the READ and EXPORT authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', AuthorityEnum.READ | AuthorityEnum.EXPORT);
+		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ | authorityMap.EXPORT);
 		expect(result.isValid).toBe(false);
 		expect(result.invalidAuthorityList).toEqual(['EXPORT']);
 	});
