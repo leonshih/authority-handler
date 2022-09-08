@@ -16,14 +16,14 @@ yarn add authority-handler
 ## Configuration
 * Authority Enum (or use default) 
 ```js
-enum AuthorityEnum {
-  NONE,
-  READ = 1 << 0, // 1 讀取
-  CREATE = 1 << 1, // 2 建立
-  UPDATE = 1 << 2, // 4 更新
-  DELETE = 1 << 3, // 8 刪除
-  EXPORT = 1 << 4, // 16 匯出
-  IMPORT = 1 << 5, // 32 匯入
+const authorityMap = {
+	NONE: 0,
+	READ: 1 << 0, // 1 讀取
+	CREATE: 1 << 1, // 2 建立
+	UPDATE: 1 << 2, // 4 更新
+	DELETE: 1 << 3, // 8 刪除
+	EXPORT: 1 << 4, // 16 匯出
+	IMPORT: 1 << 5, // 32 匯入
 }
 ```
 
@@ -52,19 +52,6 @@ const functionAuthorityMap = {
 };
 ```
 
-* The map of authority action name and it's authority value
-```js
-const authorityNameMap = {
-	NONE: AuthorityEnum.NONE,
-	READ: AuthorityEnum.READ,
-	UPDATE: AuthorityEnum.UPDATE,
-	DELETE: AuthorityEnum.DELETE,
-	CREATE: AuthorityEnum.CREATE,
-	EXPORT: AuthorityEnum.EXPORT,
-	IMPORT: AuthorityEnum.IMPORT,
-};
-```
-
 ## Data structure
 * User authority list
 ```js
@@ -83,7 +70,7 @@ import AuthorityHandler from 'authority-handler'
 
 const authorityHandler = new AuthorityHandler({ 
     functionAuthorityMap, 
-    authorityNameMap 
+    authorityMap 
 });
 ``` 
 
