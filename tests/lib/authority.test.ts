@@ -1,12 +1,16 @@
-import { authorityMap, functionAuthorityMap, AuthorityNameEnum } from '../../config/authorityConfig'
+import { functionAuthorityMap } from '../../config/authorityConfig'
 import AuthorityHandler from '../../lib/authorityHandler'
 
-const authorityHandler = new AuthorityHandler({ functionAuthorityMap, authorityMap });
 const userAuthorityList = [
 	{ functionKey: 'F01', authority: 3 },
 	{ functionKey: 'F02', authority: 3 },
 	{ functionKey: 'F03', authority: 16 },
 ];
+
+const authorityHandler = new AuthorityHandler({ functionAuthorityMap });
+const authorityMap = authorityHandler.authorityMap;
+const AuthorityNameEnum = authorityHandler.AuthorityNameEnum;
+
 
 describe('Verifying the authoriy of function', () => {
 	it('should return the result that isValid is true when verifying the READ authority of function F01', () => {
