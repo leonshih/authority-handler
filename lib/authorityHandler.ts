@@ -1,3 +1,9 @@
+import {
+	authorityMap,
+	AuthorityNameEnum
+} from '../config/authorityConfig';
+
+
 interface IUserAuthority {
   functionKey: string;
   authority: number;
@@ -6,10 +12,16 @@ interface IUserAuthority {
 export default class AuthorityHandler {
 	functionAuthorityMap: any;
 	authorityMap: any;
+	AuthorityNameEnum: any;
 
-	constructor(config: {functionAuthorityMap: any, authorityMap: any}) {
+	constructor(config: {
+        functionAuthorityMap: any, 
+        authorityMap?: any, 
+        AuthorityNameEnum?: any
+    }) {
 		this.functionAuthorityMap = config.functionAuthorityMap;
-		this.authorityMap = config.authorityMap;
+		this.authorityMap = config.authorityMap ?? authorityMap;
+		this.AuthorityNameEnum = config.AuthorityNameEnum ?? AuthorityNameEnum;
 	}
 
 	/**

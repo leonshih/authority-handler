@@ -1,4 +1,4 @@
-/** 權限Enum */
+/** 權限Map */
 export const authorityMap = {
 	NONE: 0,
 	READ: 1 << 0, // 1 讀取
@@ -42,4 +42,4 @@ export enum AuthorityNameEnum {
     IMPORT = 'IMPORT',
 }
 
-export default { authorityMap, functionAuthorityMap };
+export default { authorityMap, functionAuthorityMap, AuthorityNameEnum };
