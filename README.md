@@ -14,7 +14,7 @@ yarn add authority-handler
 ```
 
 ## Configuration
-* Authority Map (or use default) 
+* Authority Map
 ```js
 /** 權限Map */
 export const authorityMap = {
@@ -54,7 +54,7 @@ export const functionAuthorityMap = {
 };
 ```
 
-* Determine the authority name enum (or use default)
+* Determine the authority name enum (
 ```js
 /** 平台功能權限名稱 */
 export enum AuthorityNameEnum {
