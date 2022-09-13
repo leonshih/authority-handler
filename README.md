@@ -54,7 +54,7 @@ export const functionAuthorityMap = {
 };
 ```
 
-* Determine the authority name enum (
+* Determine the authority name enum (optional)
 ```js
 /** 平台功能權限名稱 */
 export enum AuthorityNameEnum {
