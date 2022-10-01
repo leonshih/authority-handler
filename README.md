@@ -67,16 +67,6 @@ export enum AuthorityNameEnum {
 }
 ```
 
-## Data structure
-* User authority list
-```js
-[
-    { functionKey: 'F01', authority: 3 },
-    { functionKey: 'F02', authority: 3 },
-    { functionKey: 'F03', authority: 16 },
-];
-```
-
 ## Usage
 
 * Create an instance
@@ -101,6 +91,14 @@ const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ
 * Verify the user's authority in function
 ```js
 const AuthorityNameEnum = authorityHandler.AuthorityNameEnum;
+
+// Data to be verified
+const userAuthorityList = 
+    [
+        { functionKey: 'F01', authority: 3 },
+        { functionKey: 'F02', authority: 3 },
+        { functionKey: 'F03', authority: 16 },
+    ];
 
 const result = authorityHandler.verifyUserFunctionAuthority(
     userAuthorityList, 
