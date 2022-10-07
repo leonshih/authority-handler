@@ -1,52 +1,52 @@
-import { functionAuthorityMap } from '../../config/authorityConfig'
+import { functionPermissionMap } from '../../config/authorityConfig'
 import AuthorityHandler from '../../lib/authorityHandler'
 
 const userAuthorityList = [
-	{ functionKey: 'F01', authority: 3 },
-	{ functionKey: 'F02', authority: 3 },
-	{ functionKey: 'F03', authority: 16 },
+	{ functionKey: 'F01', permission: 3 },
+	{ functionKey: 'F02', permission: 3 },
+	{ functionKey: 'F03', permission: 16 },
 ];
 
-const authorityHandler = new AuthorityHandler({ functionAuthorityMap });
-const authorityMap = authorityHandler.authorityMap;
-const AuthorityNameEnum = authorityHandler.AuthorityNameEnum;
+const authorityHandler = new AuthorityHandler({ functionPermissionMap });
+const permissionMap = authorityHandler.permissionMap;
+const PermissionNameEnum = authorityHandler.PermissionNameEnum;
 
 
 describe('Verifying the authoriy of function', () => {
-	it('should return the result that isValid is true when verifying the READ authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ);
+	it('should return the result that isValid is true when verifying the READ permission of function F01', () => {
+		const result = authorityHandler.verifyFunctionPermission('F01', permissionMap.READ);
 		expect(result.isValid).toBe(true);
-		expect(result.invalidAuthorityList).toEqual([]);
+		expect(result.invalidPermissionList).toEqual([]);
 	});
 
-	it('should return the result that isValid is true when verifying the READ and UPDATE authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ | authorityMap.UPDATE);
+	it('should return the result that isValid is true when verifying the READ and UPDATE permission of function F01', () => {
+		const result = authorityHandler.verifyFunctionPermission('F01', permissionMap.READ | permissionMap.UPDATE);
 		expect(result.isValid).toBe(true);
-		expect(result.invalidAuthorityList).toEqual([]);
+		expect(result.invalidPermissionList).toEqual([]);
 	});
 
-	it('should return the result that isValid is false when verifying the EXPORT authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.EXPORT);
+	it('should return the result that isValid is false when verifying the EXPORT permission of function F01', () => {
+		const result = authorityHandler.verifyFunctionPermission('F01', permissionMap.EXPORT);
 		expect(result.isValid).toBe(false);
-		expect(result.invalidAuthorityList).toEqual(['EXPORT']);
+		expect(result.invalidPermissionList).toEqual(['EXPORT']);
 	});
 
-	it('should return the result that isValid is false when verifying the READ and EXPORT authority of function F01', () => {
-		const result = authorityHandler.verifyFunctionAuthority('F01', authorityMap.READ | authorityMap.EXPORT);
+	it('should return the result that isValid is false when verifying the READ and EXPORT permission of function F01', () => {
+		const result = authorityHandler.verifyFunctionPermission('F01', permissionMap.READ | permissionMap.EXPORT);
 		expect(result.isValid).toBe(false);
-		expect(result.invalidAuthorityList).toEqual(['EXPORT']);
+		expect(result.invalidPermissionList).toEqual(['EXPORT']);
 	});
 });
 
 
 describe('Verify the user function authority', () => {
-	it('should return true when verifying the user READ authority in function F01', () => {
-		const result = authorityHandler.verifyUserFunctionAuthority(userAuthorityList, 'F01', AuthorityNameEnum.READ);
+	it('should return true when verifying the user READ permission in function F01', () => {
+		const result = authorityHandler.verifyUserFunctionPermission(userAuthorityList, 'F01', PermissionNameEnum.READ);
 		expect(result).toBe(true);
 	});
 
-	it('should return false when verifying the user EXPORT authority in function F01', () => {
-		const result = authorityHandler.verifyUserFunctionAuthority(userAuthorityList, 'F01', AuthorityNameEnum.EXPORT);
+	it('should return false when verifying the user EXPORT permission in function F01', () => {
+		const result = authorityHandler.verifyUserFunctionPermission(userAuthorityList, 'F01', PermissionNameEnum.EXPORT);
 		expect(result).toBe(false);
 	});
 });

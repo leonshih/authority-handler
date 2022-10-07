@@ -1,5 +1,5 @@
 /** 權限Map */
-export const authorityMap = {
+export const permissionMap = {
 	NONE: 0,
 	READ: 1 << 0, // 1 讀取
 	CREATE: 1 << 1, // 2 建立
@@ -10,30 +10,30 @@ export const authorityMap = {
 }
 
 /** 平台功能權限 */
-export const functionAuthorityMap = {
+export const functionPermissionMap = {
 	/** 功能一 */
 	F01:
-    authorityMap.READ |
-    authorityMap.CREATE |
-    authorityMap.UPDATE |
-    authorityMap.DELETE,
+    permissionMap.READ |
+    permissionMap.CREATE |
+    permissionMap.UPDATE |
+    permissionMap.DELETE,
 	/** 功能二 */
 	F02:
-    authorityMap.READ |
-    authorityMap.CREATE |
-    authorityMap.UPDATE |
-    authorityMap.DELETE |
-    authorityMap.EXPORT |
-    authorityMap.IMPORT,
+    permissionMap.READ |
+    permissionMap.CREATE |
+    permissionMap.UPDATE |
+    permissionMap.DELETE |
+    permissionMap.EXPORT |
+    permissionMap.IMPORT,
 	/** 功能三 */
 	F03: 
-    authorityMap.READ | 
-    authorityMap.EXPORT | 
-    authorityMap.IMPORT,
+    permissionMap.READ | 
+    permissionMap.EXPORT | 
+    permissionMap.IMPORT,
 };
 
 /** 平台功能權限名稱 */
-export enum AuthorityNameEnum {
+export enum PermissionNameEnum {
     READ = 'READ',
     CREATE = 'CREATE',
     UPDATE = 'UPDATE',
@@ -42,4 +42,4 @@ export enum AuthorityNameEnum {
     IMPORT = 'IMPORT',
 }
 
-export default { authorityMap, functionAuthorityMap, AuthorityNameEnum };
+export default { permissionMap, functionPermissionMap, PermissionNameEnum };

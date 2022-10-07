@@ -1,11 +1,13 @@
 {
   "name": "authority-handler",
-  "version": "1.0.2",
+  "version": "1.0.6",
   "description": "An authority handler of backend server",
   "main": "./build/lib/authorityHandler.js",
   "types": "./build/lib/authorityHandler.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "pre-publish": "rm -rf ./build && tsc",
+    "publish": "npm publish"
   },
   "repository": {
     "type": "git",
