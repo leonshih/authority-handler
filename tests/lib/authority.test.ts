@@ -41,12 +41,12 @@ describe('Verifying the authoriy of function', () => {
 
 describe('Verify the user function authority', () => {
 	it('should return true when verifying the user READ permission in function F01', () => {
-		const result = authorityHandler.verifyUserFunctionPermission(userAuthorityList, 'F01', PermissionNameEnum.READ);
+		const result = authorityHandler.verifyUserFunctionPermission(userAuthorityList, 'F01', permissionMap.READ);
 		expect(result).toBe(true);
 	});
 
 	it('should return false when verifying the user EXPORT permission in function F01', () => {
-		const result = authorityHandler.verifyUserFunctionPermission(userAuthorityList, 'F01', PermissionNameEnum.EXPORT);
+		const result = authorityHandler.verifyUserFunctionPermission(userAuthorityList, 'F01', permissionMap.EXPORT);
 		expect(result).toBe(false);
 	});
 });

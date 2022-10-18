@@ -79,9 +79,8 @@ export default class AuthorityHandler {
 	verifyUserFunctionPermission(
 		userAuthorityList: IUserAuthority[],
 		targetFunctionKey: string,
-		permissionName: string
+		permission: number
 	) {
-		const permission = this.permissionMap[permissionName];
 		const authorityData = userAuthorityList.find(
 			({ functionKey }: { functionKey: string }) =>
 				functionKey === targetFunctionKey
