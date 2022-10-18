@@ -54,18 +54,6 @@ export const functionPermissionMap = {
 };
 ```
 
-* Determine the permission name enum (optional)
-```js
-/** 平台功能權限名稱 */
-export enum PermissionNameEnum {
-    READ = 'READ',
-    CREATE = 'CREATE',
-    UPDATE = 'UPDATE',
-    DELETE = 'DELETE',
-    EXPORT = 'EXPORT',
-    IMPORT = 'IMPORT',
-}
-```
 
 ## Usage
 
@@ -75,8 +63,7 @@ import AuthorityHandler from 'authority-handler'
 
 const authorityHandler = new AuthorityHandler({ 
     functionPermissionMap, 
-    permissionMap, // or use default
-    PermissionNameEnum // or use default
+    permissionMap, // optional
 });
 ``` 
 
@@ -90,7 +77,7 @@ const result = authorityHandler.verifyFunctionPermission('F01', permissionMap.RE
 
 * Verify the user's permission in function
 ```js
-const PermissionNameEnum = authorityHandler.PermissionNameEnum;
+const permissionMap = authorityHandler.permissionMap;
 
 // Data to be verified
 const userAuthorityList = 
@@ -103,7 +90,7 @@ const userAuthorityList =
 const result = authorityHandler.verifyUserFunctionPermission(
     userPerList, 
     'F01', 
-    PermissionNameEnum.READ
+    permissionMap.READ
 );
 
 // true / false

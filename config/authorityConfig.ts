@@ -32,14 +32,4 @@ export const functionPermissionMap = {
     permissionMap.IMPORT,
 };
 
-/** 平台功能權限名稱 */
-export enum PermissionNameEnum {
-    READ = 'READ',
-    CREATE = 'CREATE',
-    UPDATE = 'UPDATE',
-    DELETE = 'DELETE',
-    EXPORT = 'EXPORT',
-    IMPORT = 'IMPORT',
-}
-
-export default { permissionMap, functionPermissionMap, PermissionNameEnum };
+export default { permissionMap, functionPermissionMap };

@@ -1,6 +1,5 @@
 import {
-	permissionMap,
-	PermissionNameEnum
+	permissionMap
 } from '../config/authorityConfig';
 
 
@@ -12,16 +11,13 @@ interface IUserAuthority {
 export default class AuthorityHandler {
 	functionPermissionMap: any;
 	permissionMap: any;
-	PermissionNameEnum: any;
 
 	constructor(config: {
         functionPermissionMap: any, 
         permissionMap?: any, 
-        PermissionNameEnum?: any
     }) {
 		this.functionPermissionMap = config.functionPermissionMap;
 		this.permissionMap = config.permissionMap ?? permissionMap;
-		this.PermissionNameEnum = config.PermissionNameEnum ?? PermissionNameEnum;
 	}
 
 	/**

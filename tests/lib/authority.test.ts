@@ -9,7 +9,6 @@ const userAuthorityList = [
 
 const authorityHandler = new AuthorityHandler({ functionPermissionMap });
 const permissionMap = authorityHandler.permissionMap;
-const PermissionNameEnum = authorityHandler.PermissionNameEnum;
 
 
 describe('Verifying the authoriy of function', () => {
