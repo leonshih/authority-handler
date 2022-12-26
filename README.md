@@ -17,7 +17,7 @@ yarn add authority-handler
 * Permission Map
 ```js
 /** 權限Map */
-export const permissionMap = {
+export const actionPermissionMap = {
     NONE: 0,
     READ: 1 << 0, // 1 讀取
     CREATE: 1 << 1, // 2 建立
@@ -34,23 +34,23 @@ export const permissionMap = {
 export const functionPermissionMap = {
     /** 功能一 */
     F01:
-        permissionMap.READ |
-        permissionMap.CREATE |
-        permissionMap.UPDATE |
-        permissionMap.DELETE,
+        actionPermissionMap.READ |
+        actionPermissionMap.CREATE |
+        actionPermissionMap.UPDATE |
+        actionPermissionMap.DELETE,
     /** 功能二 */
     F02:
-        permissionMap.READ |
-        permissionMap.CREATE |
-        permissionMap.UPDATE |
-        permissionMap.DELETE |
-        permissionMap.EXPORT |
-        permissionMap.IMPORT,
+        actionPermissionMap.READ |
+        actionPermissionMap.CREATE |
+        actionPermissionMap.UPDATE |
+        actionPermissionMap.DELETE |
+        actionPermissionMap.EXPORT |
+        actionPermissionMap.IMPORT,
     /** 功能三 */
     F03:
-        permissionMap.READ | 
-        permissionMap.EXPORT | 
-        permissionMap.IMPORT,
+        actionPermissionMap.READ | 
+        actionPermissionMap.EXPORT | 
+        actionPermissionMap.IMPORT,
 };
 ```
 
@@ -69,18 +69,18 @@ const authorityHandler = new AuthorityHandler({
 
 * Verify the authoriy of function
 ```js
-const permissionMap = authorityHandler.permissionMap;
+const actionPermissionMap = authorityHandler.actionPermissionMap;
 
-const result = authorityHandler.verifyFunctionPermission('F01', permissionMap.READ);
+const result = authorityHandler.verifyFunctionPermission('F01', actionPermissionMap.READ);
 // true / false
 ```
 
 * Verify the user's permission in function
 ```js
-const permissionMap = authorityHandler.permissionMap;
+const actionPermissionMap = authorityHandler.actionPermissionMap;
 
 // Data to be verified
-const userAuthorityList = 
+const userAuthorities = 
     [
         { functionKey: 'F01', permission: 3 },
         { functionKey: 'F02', permission: 3 },
@@ -88,9 +88,9 @@ const userAuthorityList =
     ];
 
 const result = authorityHandler.verifyUserFunctionPermission(
-    userPerList, 
+    userAuthorituserAuthoritiesyList, 
     'F01', 
-    permissionMap.READ
+    actionPermissionMap.READ
 );
 
 // true / false
