@@ -88,7 +88,7 @@ const userAuthorities =
     ];
 
 const result = authorityHandler.verifyUserFunctionPermission(
-    userAuthorituserAuthoritiesyList, 
+    userAuthorities, 
     'F01', 
     actionPermissionMap.READ
 );
