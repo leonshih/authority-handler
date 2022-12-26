@@ -77,8 +77,6 @@ const result = authorityHandler.verifyFunctionPermission('F01', actionPermission
 
 * Verify the user's permission in function
 ```js
-const actionPermissionMap = authorityHandler.actionPermissionMap;
-
 // Data to be verified
 const userAuthorities = 
     [
@@ -87,11 +85,7 @@ const userAuthorities =
         { functionKey: 'F03', permission: 16 },
     ];
 
-const result = authorityHandler.verifyUserFunctionPermission(
-    userAuthorities, 
-    'F01', 
-    actionPermissionMap.READ
-);
+const result = authorityHandler.verifyUserAuthorities(userAuthorities, 'F01', 'READ');
 
 // true / false
 ```
