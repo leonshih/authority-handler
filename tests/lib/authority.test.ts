@@ -40,12 +40,12 @@ describe('Verifying the authoriy of function', () => {
 
 describe('Verify the user function authority', () => {
 	it('should return true when verifying the user READ permission in function F01', () => {
-		const result = authorityHandler.verifyUserAuthorities(userAuthorities, 'F01', actionPermissionMap.READ);
+		const result = authorityHandler.verifyUserAuthorities(userAuthorities, 'F01', 'READ');
 		expect(result).toBe(true);
 	});
 
 	it('should return false when verifying the user EXPORT permission in function F01', () => {
-		const result = authorityHandler.verifyUserAuthorities(userAuthorities, 'F01', actionPermissionMap.EXPORT);
+		const result = authorityHandler.verifyUserAuthorities(userAuthorities, 'F01', 'EXPORT');
 		expect(result).toBe(false);
 	});
 });
