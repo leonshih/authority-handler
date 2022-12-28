@@ -1,43 +1,43 @@
-import { actionPermissionMap } from "../config/authorityConfig";
+import { functionPermissionMap } from "../config/authorityConfig";
 
 interface IUserAuthority {
-	functionKey: string;
+	serviceKey: string;
 	permission: number;
 }
 
 export default class AuthorityHandler {
+	servicePermissionMap: any;
 	functionPermissionMap: any;
-	actionPermissionMap: any;
 
 	constructor(config: {
-		functionPermissionMap: any;
-		actionPermissionMap?: any;
+		servicePermissionMap: any;
+		functionPermissionMap?: any;
 	}) {
-		this.functionPermissionMap = config.functionPermissionMap;
-		this.actionPermissionMap =
-			config.actionPermissionMap ?? actionPermissionMap;
+		this.servicePermissionMap = config.servicePermissionMap;
+		this.functionPermissionMap =
+			config.functionPermissionMap ?? functionPermissionMap;
 	}
 
 	/**
-	 * 檢查該功能是否包含該權限
+	 * 檢查該服務是否包含該權限
+	 * @param serviceKey 服務代碼 e.g. 'F01'
 	 * @param permission 權限值 e.g. 3
-	 * @param functionKey 功能key值 e.g. 'F01'
 	 * @returns
 	 * @example
-	 * verifyFunctionPermission('F01', PermissionEnum.READ); // { isValid: true, invalidPermissionList: [] }
-	 * verifyFunctionPermission('F01', PermissionEnum.EXPORT); // { isValid: false, invalidPermissionList: ['export'] }
-	 * verifyFunctionPermission('F01', PermissionEnum.READ | PermissionEnum.EXPORT); // { isValid: false, invalidPermissionList: ['export'] }
+	 * verifyServicePermission('F01', PermissionEnum.READ); // { isValid: true, invalidPermissionList: [] }
+	 * verifyServicePermission('F01', PermissionEnum.EXPORT); // { isValid: false, invalidPermissionList: ['export'] }
+	 * verifyServicePermission('F01', PermissionEnum.READ | PermissionEnum.EXPORT); // { isValid: false, invalidPermissionList: ['export'] }
 	 */
-	verifyFunctionPermission(
-		functionKey: string,
+	verifyServicePermission(
+		serviceKey: string,
 		permission: number
 	): {
 		isValid: boolean;
 		invalidPermissionList: string[];
 	} {
-		const functionPermission = this.functionPermissionMap[functionKey];
+		const servicePermission = this.servicePermissionMap[serviceKey];
 
-		const invalidPermission = permission & ~functionPermission;
+		const invalidPermission = permission & ~servicePermission;
 		return {
 			isValid: invalidPermission === 0,
 			invalidPermissionList: this.getNameListByPermission(invalidPermission),
@@ -54,7 +54,7 @@ export default class AuthorityHandler {
 	getNameListByPermission(permission: number): string[] {
 		const nameList = [];
 
-		for (const [name, value] of Object.entries(this.actionPermissionMap)) {
+		for (const [name, value] of Object.entries(this.functionPermissionMap)) {
 			if (permission & (value as number)) {
 				nameList.push(name);
 			}
@@ -64,23 +64,23 @@ export default class AuthorityHandler {
 	}
 
 	/**
-	 * 檢查使用者於某功能內是否有某權限
-	 * @param userAuthorities 被驗證的權限清單  e.g. [{ functionKey: 'F01', permission: 3 }]
-	 * @param targetFunctionKey 功能代碼 e.g. 'F01'
-	 * @param permission 權限值 e.g. 3
+	 * 檢查使用者於某服務內是否有某功能之權限
+	 * @param userAuthorities 被驗證的權限清單  e.g. [{ serviceKey: 'F01', permission: 3 }]
+	 * @param targetServiceKey 服務代碼 e.g. 'F01'
+	 * @param functionKey 功能代碼 e.g. 'READ'
 	 * @returns boolean
 	 */
 	verifyUserAuthorities(
 		userAuthorities: IUserAuthority[],
-		targetFunctionKey: string,
-		actionKey: string
+		targetServiceKey: string,
+		functionKey: string
 	) {
 		const authorityData = userAuthorities.find(
-			({ functionKey }: { functionKey: string }) =>
-				functionKey === targetFunctionKey
+			({ serviceKey }: { serviceKey: string }) =>
+				serviceKey === targetServiceKey
 		);
 
-		const permission = this.actionPermissionMap[actionKey];
+		const permission = this.functionPermissionMap[functionKey];
 
 		return !!(authorityData ? authorityData.permission & permission : 0);
 	}

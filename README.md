@@ -17,7 +17,7 @@ yarn add authority-handler
 * Permission Map
 ```js
 /** 權限Map */
-export const actionPermissionMap = {
+export const functionPermissionMap = {
     NONE: 0,
     READ: 1 << 0, // 1 讀取
     CREATE: 1 << 1, // 2 建立
@@ -28,29 +28,29 @@ export const actionPermissionMap = {
 }
 ```
 
-* Determine the permission of actions in every function
+* Determine the permission of services' functions
 ```js
-/** 平台功能權限 */
-export const functionPermissionMap = {
-    /** 功能一 */
+/** 服務權限值對應表 */
+export const servicePermissionMap = {
+    /** 服務一 */
     F01:
-        actionPermissionMap.READ |
-        actionPermissionMap.CREATE |
-        actionPermissionMap.UPDATE |
-        actionPermissionMap.DELETE,
-    /** 功能二 */
+        functionPermissionMap.READ |
+        functionPermissionMap.CREATE |
+        functionPermissionMap.UPDATE |
+        functionPermissionMap.DELETE,
+    /** 服務二 */
     F02:
-        actionPermissionMap.READ |
-        actionPermissionMap.CREATE |
-        actionPermissionMap.UPDATE |
-        actionPermissionMap.DELETE |
-        actionPermissionMap.EXPORT |
-        actionPermissionMap.IMPORT,
-    /** 功能三 */
+        functionPermissionMap.READ |
+        functionPermissionMap.CREATE |
+        functionPermissionMap.UPDATE |
+        functionPermissionMap.DELETE |
+        functionPermissionMap.EXPORT |
+        functionPermissionMap.IMPORT,
+    /** 服務三 */
     F03:
-        actionPermissionMap.READ | 
-        actionPermissionMap.EXPORT | 
-        actionPermissionMap.IMPORT,
+        functionPermissionMap.READ | 
+        functionPermissionMap.EXPORT | 
+        functionPermissionMap.IMPORT,
 };
 ```
 
@@ -62,27 +62,27 @@ export const functionPermissionMap = {
 import AuthorityHandler from 'authority-handler'
 
 const authorityHandler = new AuthorityHandler({ 
-    functionPermissionMap, 
+    servicePermissionMap, 
     permissionMap, // optional
 });
 ``` 
 
-* Verify the authoriy of function
+* Verify the authoriy of service
 ```js
-const actionPermissionMap = authorityHandler.actionPermissionMap;
+const functionPermissionMap = authorityHandler.functionPermissionMap;
 
-const result = authorityHandler.verifyFunctionPermission('F01', actionPermissionMap.READ);
+const result = authorityHandler.verifyServicePermission('F01', functionPermissionMap.READ);
 // true / false
 ```
 
-* Verify the user's permission in function
+* Verify the user's permission of service
 ```js
 // Data to be verified
 const userAuthorities = 
     [
-        { functionKey: 'F01', permission: 3 },
-        { functionKey: 'F02', permission: 3 },
-        { functionKey: 'F03', permission: 16 },
+        { serviceKey: 'F01', permission: 3 },
+        { serviceKey: 'F02', permission: 3 },
+        { serviceKey: 'F03', permission: 16 },
     ];
 
 const result = authorityHandler.verifyUserAuthorities(userAuthorities, 'F01', 'READ');

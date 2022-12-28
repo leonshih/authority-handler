@@ -1,6 +1,6 @@
 {
   "name": "authority-handler",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "An authority handler of backend server",
   "main": "./build/lib/authorityHandler.js",
   "types": "./build/lib/authorityHandler.d.ts",
